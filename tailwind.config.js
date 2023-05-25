@@ -34,6 +34,7 @@ export default {
         dark: '#525264',
         fairy: '#ee509d',
         normal: '#b8b8b8',
+        dragon: '#4169e1'
       },
     },
   },
