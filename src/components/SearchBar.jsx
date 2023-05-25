@@ -10,7 +10,7 @@ function Search() {
 
     const filteredPokemon = pokemonData.pokemon.filter(pokemon => {
         return pokemon.name.toLowerCase().includes(filterText.toLowerCase());
-    });
+    }).slice(0,10);
 
 
 
@@ -23,6 +23,7 @@ function Search() {
                     {filteredPokemon.map(pokemon => (
                         <li key={pokemon.name} className='capitalize name text-center py-1 border-gray-300 border bg-slate-200'>{pokemon.name}</li>
                     ))}
+                    <li className='capitalize name text-blue-400 text-center py-1 border-gray-300 border bg-slate-200'>See All Results</li>
                 </ul>
             </div>
         </>
