@@ -42,14 +42,13 @@ function PokemonCard({pokemon}) {
         }
       }
       
-
     let types = "from-["+ getColor(pokemon.types[0].type.name) +"]"+ " to-[" + getColor(pokemon.types[pokemon.types.length-1].type.name) +"]";
     return (
         <a href="#" className={`flex flex-col items-center px-1 sm:px-3 overflow-hidden bg-gradient-to-tl rounded-md`} style={{background: `linear-gradient(to bottom right,${getColor(pokemon.types[0].type.name)}, ${getColor(pokemon.types[pokemon.types.length-1].type.name)})`}}>
             <p className="name capitalize text-gray-50 text-xl">{pokemon.name}</p>
             <div className="flex flex-row items-center justify-between w-full py-1 md:py-3">
                 <img className="xl:w-32 xl:h-32 md:w-28 md:h-28 sm:w-24 sm:h-24 w-16 h-16 z-10" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`} />
-                <span className="index -ml-12 lg:-ml-12 xl:-ml-9 z-0 font-bold tracking-wider text-white opacity-50  text-4xl md:text-6xl sm:text-5xl">#{pokemon.id}</span>
+                <span className="index -ml-12 lg:-ml-12 xl:-ml-9 z-0 font-bold tracking-wider text-white opacity-50  text-4xl md:text-6xl sm:text-5xl">#{String(pokemon.id).padStart(3, '0')}</span>
             </div>
         </a>
     );
