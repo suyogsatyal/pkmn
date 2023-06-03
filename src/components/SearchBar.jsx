@@ -2,15 +2,18 @@ import { useState } from 'react';
 import './search.css'
 import pokemonData from '../data/list.json'
 import PokemonDetail from '../pages/PokemonDetail';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchResult from '../pages/SearchResult';
 function Search() {
     const [filterText, setFilterText] = useState('');
-
+    const navigate = useNavigate();
+    
     const handleInputChange = (event) => {
         setFilterText(event.target.value);
         if (event.key === "Enter") {
-            console.log(filterText)
+            event.preventDefault();
+            navigate(`/search/${filterText}`);
+      
         }
 
     };
