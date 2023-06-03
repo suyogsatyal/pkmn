@@ -34,7 +34,7 @@ function Search() {
                             </Link>
                         </li>
                     ))}
-                    {/* <li className='capitalize name text-blue-400 text-center py-1 border-gray-300 border bg-slate-200'><Link to={`/s=${filterText}`} element={<SearchResult query={filterText} />} className=' px-24 py-3'>See All Results</Link> </li> */}
+                    <li className='capitalize name text-blue-400 text-center py-1 border-gray-300 border bg-slate-200'><Link to={`/s=${filterText}`} element={<SearchResult query={filterText} />} className=' px-24 py-3'>See All Results</Link> </li>
                 </ul>
             </div>
         </>

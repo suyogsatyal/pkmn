@@ -7,7 +7,7 @@ function Home() {
             <div className="flex items-center justify-center py-3 w-full">
                 <Search></Search>
             </div >
-            <PokemonList query={null} />
+            <PokemonList query={'ass'}/>
         </>
     );
 }
