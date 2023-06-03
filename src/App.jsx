@@ -13,11 +13,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search/:query" element={<SearchResult />} />
+            <Route path="*" element={<SearchResult />} />
             <Route path="/:name" element={<PokemonDetail />} />
           </Routes>
         </div>
       </div>
-      <div className="footer absolute bottom-0 w-full bg-slate-600 flex justify-center py-3 text-gray-100">Made By&nbsp; <a href="https://github.com/suyogsatyal"> Suyog</a> </div>
+      <div className="footer relative bottom-0 w-full bg-slate-600 flex justify-center py-3 text-gray-100">Made By&nbsp; <a href="https://github.com/suyogsatyal"> Suyog</a> </div>
     </>
   )
 }
