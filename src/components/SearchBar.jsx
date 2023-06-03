@@ -35,7 +35,7 @@ function Search() {
                         </li>
                     ))}
                     <li className='capitalize name w-full text-blue-400 text-center py-1 border-gray-300 border bg-slate-200 overflow-hidden'>
-                        <Link to={`/search=${filterText}`} element={<SearchResult/>} className=' px-64 py-3'>See All Results</Link>
+                    <Link to={`/search/${filterText}`} element={<SearchResult/>} className=' px-64 py-3'>See All Results</Link>
                     </li>
                 </ul>
             </div>

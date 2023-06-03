@@ -11,7 +11,7 @@ function App() {
         <h3 className="pokedex text-center text-lg md:text-xl text-gray-600">Made using <a href="https://pokeapi.co" className=" text-red-500">Poke<span className=" text-yellow-400">Api</span></a></h3>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search=:query" element={<SearchResult />} />
+          <Route path="/search/:query" element={<SearchResult />} />
           <Route path="/:name" element={<PokemonDetail/>}/>
         </Routes>
       </div>
