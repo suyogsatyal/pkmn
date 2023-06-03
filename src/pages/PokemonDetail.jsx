@@ -23,6 +23,7 @@ function PokemonDetail({ id }) {
         getDetails();
     }, [])
 
+    console.log("detailspage")
     return (
         <h1 className=" text-lg">
             {pokedex.name}
