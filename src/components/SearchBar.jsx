@@ -32,13 +32,13 @@ function Search() {
                 <ul className={filterText === '' ? 'hidden' : 'block' + ' absolute z-30 w-full'}>
                     {filteredPokemon.map(pokemon => (
                         <li key={pokemon.name} className='capitalize name w-full text-center py-1 border-gray-300 border bg-slate-200 overflow-hidden'>
-                            <Link to={`/${pokemon.name}`} element={<PokemonDetail />} className=' px-64 py-3'>
+                            <Link to={`/${pokemon.name}`} element={<PokemonDetail />} className=' py-3'>
                                 {pokemon.name}
                             </Link>
                         </li>
                     ))}
                     <li className='capitalize name w-full text-blue-400 text-center py-1 border-gray-300 border bg-slate-200 overflow-hidden'>
-                    <Link to={`/search/${filterText}`} element={<SearchResult/>} className=' px-64 py-3'>See All Results</Link>
+                    <Link to={`/search/${filterText}`} element={<SearchResult/>} className=' py-3'>See All Results</Link>
                     </li>
                 </ul>
             </div>
