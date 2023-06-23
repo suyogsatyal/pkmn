@@ -114,7 +114,7 @@ function PokemonDetail({ id }) {
                             
                             <span className="flex justify-between py-3 border-b border-gray-400">
                                 <span>Height</span>  
-                                <span>{pokedex.height / 10 + ' kg'}</span>
+                                <span>{pokedex.height / 10 + ' m'}</span>
                             </span>
 
                             <span className="flex justify-between py-3 border-b border-gray-400">
@@ -150,7 +150,7 @@ function PokemonDetail({ id }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
 
-                    <div>Hello</div>
+                    <div></div>
                 </div>
             </div>
         </>
