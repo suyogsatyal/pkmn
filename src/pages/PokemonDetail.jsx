@@ -9,6 +9,11 @@ function PokemonDetail({ id }) {
     const [species, setSpecies] = useState({});
     const [loader, setLoader] = useState(true);
     const navigate = useNavigate();
+    const modifyFlavor = (str) => {
+        return str.replace(/[\n\f]/g, ' ');
+    };
+    
+
 
     useEffect(() => {
         const getDetails = async () => {
@@ -145,7 +150,7 @@ function PokemonDetail({ id }) {
                     </div>
                 </div>
                 <div className="text-center py-4 name">
-                    {species.flavor_text_entries[0].flavor_text}
+                    {modifyFlavor(species.flavor_text_entries[0].flavor_text)}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
