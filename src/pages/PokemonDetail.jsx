@@ -1,28 +1,36 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import '../components/pattern.css'
 
 function PokemonDetail({ id }) {
     const param = useParams();
     const [pokedex, setPokedex] = useState({});
-    const [loader, setLoader] = useState(true)
+    const [species, setSpecies] = useState({});
+    const [loader, setLoader] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getDetails = async () => {
             const res = await fetch('https://pokeapi.co/api/v2/pokemon/' + param.name);
+            if (res.status === 404) {
+                setLoader(false);
+                return (
+                    <>
+                        <span className="capitalize">{param.name}</span> doesn't exist.
+                    </>
+                );
+            }
             const data = await res.json();
             setPokedex(data);
-            setLoader(false);
-            getEvolution(data.id);
+            getEvolution(data.species.url);
         }
 
-        const getEvolution = async (id) => {
-            const res = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + id);
+        const getEvolution = async (url) => {
+            const res = await fetch(url);
             const data = await res.json();
-            fetch(data.evolution_chain.url)
-                .then(response => response.json())
-            // .then(newData => console.log(newData))
+            setSpecies(data);
+            setLoader(false);
         }
         getDetails();
 
@@ -72,32 +80,78 @@ function PokemonDetail({ id }) {
     }
 
 
-    // console.log(pokedex.types[0].type.name);
-    if(loader){
-        return(<Loading />)
+    if (loader) {
+        return (<Loading />)
     }
 
     return (
         <>
-            <Link to="/" className={'inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'}>
+            <Link onClick={() => navigate(-1)} className={'inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'}>
                 ← Go Back
             </Link>
-            <div className=" my-2 container">
-                <div className="flex flex-col banner py-3 px-5 w-full text-gray-50" style={{ background: `linear-gradient(to bottom right,${getColor(pokedex.types[0].type.name)}, ${getColor(pokedex.types[pokedex.types.length - 1].type.name)})`}}>
-                    <div className="flex justify-between capitalize">
-                        <span className="uppercase name text-lg md:text-3xl lg:text-5xl">{pokedex.name}</span>
-                        <span className="name text-lg md:text-3xl lg:text-5xl">#{String(pokedex.id).padStart(3, '0')}</span>
+            <div className="container">
+                <div className="my-2 grid grid-cols-1 sm:grid-cols-8 gap-12 place-content-center">
+                    <div className="flex flex-col col-span-8 sm:col-span-5 banner py-3 px-5 w-full text-gray-50 rounded-lg" style={{ background: `linear-gradient(to bottom right,${getColor(pokedex.types[0].type.name)}, ${getColor(pokedex.types[pokedex.types.length - 1].type.name)})` }}>
+                        <div className="flex justify-between capitalize">
+                            <span className="uppercase name text-lg md:text-3xl lg:text-4xl xl:text-5xl">{pokedex.name}</span>
+                            <span className="name text-lg md:text-3xl lg:text-4xl xl:text-5xl">#{String(pokedex.id).padStart(3, '0')}</span>
+                        </div>
+                        <div className="flex justify-center">
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedex.id}.png`} alt="" />
+                        </div>
+                        <div className="flex justify-center">
+                            <span className="uppercase px-3 py-1 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white">{pokedex.types[0].type.name}</span>
+                            <span className="px-3"></span>
+                            <span className={`uppercase px-3 py-1 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white ${pokedex.types.length === 2 ? 'block' : 'hidden'}`}>{pokedex.types[pokedex.types.length - 1].type.name}</span>
+                        </div>
                     </div>
-                    <div className="flex justify-center">
-                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedex.id}.png`} alt="" />
-                    </div>
-                    <div className="flex justify-center">
-                        <span className="uppercase px-3 py-1 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white">{pokedex.types[0].type.name}</span>
-                        <span className="px-3"></span>
-                        <span className={`uppercase px-3 py-1 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white ${pokedex.types.length ===2? 'block' : 'hidden'}`}>{pokedex.types[pokedex.types.length -1].type.name}</span>
+                    <div className="col-span-8 sm:col-span-3 py-3">
+                        <div className="flex flex-col justify-around sm:justify-between name md:text-base xl:text-xl">
+                            <span className="flex justify-between py-3 border-b border-gray-400">
+                                <span>Weight</span>  
+                                <span>{pokedex.weight / 10 + ' kg'}</span>
+                            </span>
+                            
+                            <span className="flex justify-between py-3 border-b border-gray-400">
+                                <span>Height</span>  
+                                <span>{pokedex.height / 10 + ' kg'}</span>
+                            </span>
+
+                            <span className="flex justify-between py-3 border-b border-gray-400">
+                                <span>Held Items</span>  
+                                <span className="capitalize text-right">
+                                {(pokedex.held_items.length === 0) ? 'None' : `${pokedex.held_items[0].item.name}`}
+                                <br />
+
+                                <span className="capitalize">
+                                {(pokedex.held_items.length === 2) ? `${pokedex.held_items[1].item.name}`: ''}
+                                </span>
+
+                                    {/* {(pokedex.held_items.length == 0)? 'None' : `${pokedex.held_items[0].item.name}`} */}
+                                </span>
+                            </span>
+
+                            <div className="flex justify-between py-3 border-b border-gray-400">
+                                <span>
+                                    Default
+                                    <img src={`${pokedex.sprites.front_default}`} alt='' className="-translate-x-3" / >
+                                </span>  
+                                <span className="text-right">
+                                    <span>Shiny</span> 
+                                    <img src={`${pokedex.sprites.front_shiny}`} alt='' className="translate-x-3" / >
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+                <div className="text-center py-4 name">
+                    {species.flavor_text_entries[8].flavor_text}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+
+                    <div>Hello</div>
+                </div>
             </div>
         </>
     );
