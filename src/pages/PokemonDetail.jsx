@@ -145,7 +145,7 @@ function PokemonDetail({ id }) {
                     </div>
                 </div>
                 <div className="text-center py-4 name">
-                    {species.flavor_text_entries[8].flavor_text}
+                    {species.flavor_text_entries[0].flavor_text}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
