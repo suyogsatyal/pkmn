@@ -134,10 +134,10 @@ function PokemonDetail({ id }) {
                         <div className="flex justify-between capitalize">
                             <div className="navigatePokemon flex absolute sm:hidden px-2 flex-row justify-between w-full left-0 top-2/4">
                             <div className="prev cursor-pointer" onClick={() => { setLoader(true); navigate(`/${(pokedex.id === 1) ? '' : pokedex.id - 1}`) }}>
-                                    <img src={LeftW} alt="" srcset="" className="w-4" />
+                                    <img src={LeftW} alt="" srcset="" className="w-8" />
                                 </div>
                                 <div className="next cursor-pointer" onClick={() => { setLoader(true); navigate(`/${pokedex.id + 1}`) }}>
-                                    <img src={RightW} alt="" srcset="" className="w-4" />
+                                    <img src={RightW} alt="" srcset="" className="w-8" />
                                 </div>
                             </div>
                             <span className="uppercase name text-lg md:text-3xl lg:text-4xl xl:text-5xl">{pokedex.name}</span>
