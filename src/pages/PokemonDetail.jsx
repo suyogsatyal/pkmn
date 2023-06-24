@@ -12,6 +12,7 @@ function PokemonDetail({ id }) {
     const [pokedex, setPokedex] = useState({});
     const [species, setSpecies] = useState({});
     const [loader, setLoader] = useState(true);
+    const [flavor, setFlavor] = useState('');
     const navigate = useNavigate();
     const modifyFlavor = (str) => {
         return str.replace(/[\n\f]/g, ' ');
@@ -44,6 +45,18 @@ function PokemonDetail({ id }) {
         getDetails();
         // setLoader(false);
     }, [baseURL])
+
+    useEffect(() => {
+        if (species && species.flavor_text_entries && species.flavor_text_entries.length > 0) {
+          for (let i = 0; i < species.flavor_text_entries.length; i++) {
+            if(species.flavor_text_entries[i].language.name == 'en'){
+                setFlavor(modifyFlavor(species.flavor_text_entries[i].flavor_text));
+                break;
+            };
+          }
+        }
+      }, [species]);
+      
 
     function getColor(type) {
         switch (type) {
@@ -179,7 +192,7 @@ function PokemonDetail({ id }) {
                     </div>
                 </div>
                 <div className="text-center py-4 name">
-                    {modifyFlavor(species.flavor_text_entries[0].flavor_text)}
+                    {flavor}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
