@@ -147,9 +147,8 @@ function PokemonDetail({ id }) {
                             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedex.id}.png`} alt="" />
                         </div>
                         <div className="flex justify-center">
-                            <span className="uppercase px-3 py-1 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white">{pokedex.types[0].type.name}</span>
-                            <span className="px-3"></span>
-                            <span className={`uppercase px-3 py-1 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white ${pokedex.types.length === 2 ? 'block' : 'hidden'}`}>{pokedex.types[pokedex.types.length - 1].type.name}</span>
+                            <span className="uppercase px-3 py-1 mx-3 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white">{pokedex.types[0].type.name}</span>
+                            <span className={`uppercase px-3 py-1 mx-3 text-xs md:text-lg pokedex tracking-widest border sm:border-2 rounded-sm border-white ${pokedex.types.length === 2 ? 'block' : 'hidden'}`}>{pokedex.types[pokedex.types.length - 1].type.name}</span>
                         </div>
                     </div>
                     <div className="pokemonDetailSidebar col-span-8 sm:col-span-3 py-3">
