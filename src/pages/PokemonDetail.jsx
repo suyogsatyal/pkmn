@@ -48,15 +48,15 @@ function PokemonDetail({ id }) {
 
     useEffect(() => {
         if (species && species.flavor_text_entries && species.flavor_text_entries.length > 0) {
-          for (let i = 0; i < species.flavor_text_entries.length; i++) {
-            if(species.flavor_text_entries[i].language.name == 'en'){
-                setFlavor(modifyFlavor(species.flavor_text_entries[i].flavor_text));
-                break;
-            };
-          }
+            for (let i = 0; i < species.flavor_text_entries.length; i++) {
+                if (species.flavor_text_entries[i].language.name == 'en') {
+                    setFlavor(modifyFlavor(species.flavor_text_entries[i].flavor_text));
+                    break;
+                };
+            }
         }
-      }, [species]);
-      
+    }, [species]);
+
 
     function getColor(type) {
         switch (type) {
@@ -122,18 +122,37 @@ function PokemonDetail({ id }) {
             </div>
             <div className="container w-full ">
                 <div className="pokemonDetailCard my-2 grid grid-cols-1 sm:grid-cols-8 gap-12 place-content-center relative">
-                <div className="navigatePokemon hidden absolute sm:flex z-30 flex-row justify-between w-[120%] -left-8 lg:-left-16 top-2/4">
-                                <div className="prev cursor-pointer" onClick={() => { setLoader(true); navigate(`/${pokedex.id - 1}`) }}>
-                                    <img src={Left} alt="" srcset="" className="w-8 lg:w-12" />
-                                </div>
-                                <div className="next cursor-pointer" onClick={() => { setLoader(true); navigate(`/${pokedex.id + 1}`) }}>
-                                    <img src={Right} alt="" srcset="" className="w-8 lg:w-12" />
-                                </div>
-                            </div>
+                    <div className="navigatePokemon hidden absolute sm:flex z-30 flex-row justify-between w-[120%] -left-8 lg:-left-16 top-2/4">
+                        <div className="prev cursor-pointer" onClick={() => { 
+                            setLoader(true); 
+                            if(pokedex.id == 1){
+                                navigate(`/`)
+                            } 
+                            else if(pokedex.id == 10001){
+                                navigate(`/1010`)
+                            }
+                            else{
+                                navigate(`/${pokedex.id - 1}`)
+                            }
+                            }}>
+                            <img src={Left} alt="" srcset="" className="w-8 lg:w-12" />
+                        </div>
+                        <div className="next cursor-pointer" onClick={() => { 
+                            setLoader(true); 
+                            if(pokedex.id == 1010){
+                                navigate(`/10001`)
+                            }
+                            else{
+                                navigate(`/${pokedex.id + 1}`)
+                            }
+                            }}>
+                            <img src={Right} alt="" srcset="" className="w-8 lg:w-12" />
+                        </div>
+                    </div>
                     <div className="flex flex-col col-span-8 sm:col-span-5 banner py-3 px-5 w-full text-gray-50 relative rounded-lg" style={{ background: `linear-gradient(to bottom right,${getColor(pokedex.types[0].type.name)}, ${getColor(pokedex.types[pokedex.types.length - 1].type.name)})` }}>
                         <div className="flex justify-between capitalize">
                             <div className="navigatePokemon flex absolute sm:hidden px-2 flex-row justify-between w-full left-0 top-2/4">
-                            <div className="prev cursor-pointer" onClick={() => { setLoader(true); navigate(`/${(pokedex.id === 1) ? '' : pokedex.id - 1}`) }}>
+                                <div className="prev cursor-pointer" onClick={() => { setLoader(true); navigate(`/${(pokedex.id === 1) ? '' : pokedex.id - 1}`) }}>
                                     <img src={LeftW} alt="" srcset="" className="w-8" />
                                 </div>
                                 <div className="next cursor-pointer" onClick={() => { setLoader(true); navigate(`/${pokedex.id + 1}`) }}>
