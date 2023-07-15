@@ -8,14 +8,23 @@ import Loading from "./Loading";
 function PokemonList({ query }) {
     const [pokemonList, setPokemonList] = useState([]);
     const [loader, setLoader] = useState('hidden')
-    const [pokemonDetails, setPokemonDetails] = useState([]);
+    const [pokedex, setPokedex] = useState([]);
     const [offset, setOffset] = useState(0);
 
     const getPokemon = async () => {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=24&offset=' + offset);
         const data = await res.json();
         setPokemonList(data.results);
-        if (query !== null) { 
+        if (query === "favourites") {
+            const favList = localStorage.getItem("favIDDetails");
+            console.log(favList);
+            if (favList) {
+              const parsedFavList = JSON.parse(favList);
+              getDetails(parsedFavList);
+            }
+          }
+          
+        else if (query !== null) { 
             const filteredPokemon = pokemonData.pokemon.filter(pokemon => {
                 return pokemon.name.toLowerCase().includes(query.toLowerCase());
             })
@@ -30,8 +39,8 @@ function PokemonList({ query }) {
         async function getDetails(results) {
             try {
                 const fetchPromises = results.map(pokemon => fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(res => res.json()));
-                const pokemonDetails = await Promise.all(fetchPromises);
-                setPokemonDetails(currentList => [...currentList, ...pokemonDetails]);
+                const pokedex = await Promise.all(fetchPromises);
+                setPokedex(currentList => [...currentList, ...pokedex]);
                 setLoader('hidden');
             } catch (error) {
                 // Handle error if any fetch fails
@@ -44,7 +53,7 @@ function PokemonList({ query }) {
 
     useEffect(() => {
         setLoader('block');
-        setPokemonDetails([]);
+        setPokedex([]);
         getPokemon();
     }, [offset])
 
@@ -57,16 +66,16 @@ function PokemonList({ query }) {
             <div className="py-4">
 
                 <div className={`flex flex-row justify-between py-2 ${query===null? 'block' : 'hidden'}`}>
-                    <button onClick={() => setOffset(offset - 24)} className={offset === 0 ? 'hidden' : 'block' + 'inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'}>Previous</button>
+                    <button onClick={() => setOffset(offset - 24)} className={offset === 0 ? 'hidden' : 'block' + 'inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'}>Prev</button>
                     <button></button>
                     <button onClick={() => setOffset(offset + 24)} className="inline-flex items-center justify-center right px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none">Next</button>
                 </div>
 
                 <ul className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
-                    {pokemonDetails.map((pokemon, index) => {
+                    {pokedex.map((pokedex) => {
                         return (
-                            <Link to={`/${pokemon.name}`} element={<PokemonDetail />} key={pokemon.name}>
-                                <PokemonCard pokemon={pokemon} />
+                            <Link to={`/${pokedex.name}`} element={<PokemonDetail />} key={pokedex.name}>
+                                <PokemonCard pokedex={pokedex} />
                             </Link>
                         )
                     })}

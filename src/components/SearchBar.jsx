@@ -4,6 +4,7 @@ import pokemonData from '../data/list.json'
 import PokemonDetail from '../pages/PokemonDetail';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchResult from '../pages/SearchResult';
+import Favourite from '../pages/Favourites';
 function Search() {
     const [filterText, setFilterText] = useState('');
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ function Search() {
                     <div className='flex flex-row justify-around gap-2'>
                         <a className='inline-flex items-center justify-center px-4 py-2 text-base cursor-pointer font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none' onClick={() => { navigate(`/search/${filterText}`)}}>Search</a>
                         <a className='inline-flex items-center justify-center px-4 py-2 text-base cursor-pointer font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none' onClick={() => { navigate(`/${Math.floor(Math.random() * 1010)}`)}}>Random</a>
+                        <Link to={`/favourites`} element={<Favourite/>} className='inline-flex items-center justify-center px-4 py-2 text-base cursor-pointer font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'>❤️</Link>
                     </div>
                 </div>
                 <span className="bar"></span>
