@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import PokemonDetail from "./pages/PokemonDetail";
 import SearchResult from "./pages/SearchResult";
-import Favourite from "./pages/Favourites";
+import Favourites from "./pages/Favourites";
 import { PokemonContext } from "./components/resources/context/Context";
 import { PokemonProvider } from "./components/resources/context/Context";
 import Home from "./pages/Home";
@@ -71,7 +71,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search/:query" element={<SearchResult />} />
-            <Route exact path="/favourites" component={Favourite} />
+            <Route exact path="/favourites" element={<Favourites />} />
             <Route path="*" element={<SearchResult />} />
             <Route path="/:name" element={<PokemonDetail />} />
           </Routes>

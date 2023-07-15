@@ -11,32 +11,39 @@ function PokemonList({ query }) {
     const [pokedex, setPokedex] = useState([]);
     const [offset, setOffset] = useState(0);
 
+
+
     const getPokemon = async () => {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=24&offset=' + offset);
         const data = await res.json();
         setPokemonList(data.results);
+        
         if (query === "favourites") {
-            const favList = localStorage.getItem("favIDDetails");
-            console.log(favList);
-            if (favList) {
-              const parsedFavList = JSON.parse(favList);
-              getDetails(parsedFavList);
+            const fetchData = async () => {
+                const favList = localStorage.getItem("favIDDetails");
+                if (favList) {
+                  const parsedFavList = JSON.parse(favList);
+                  setPokemonList([...parsedFavList]);
+                  await getDetails(parsedFavList);
+                }
+              }
+              fetchData();
             }
-          }
           
-        else if (query !== null) { 
+        else if (query !== null) {
             const filteredPokemon = pokemonData.pokemon.filter(pokemon => {
                 return pokemon.name.toLowerCase().includes(query.toLowerCase());
             })
             setPokemonList(filteredPokemon);
             getDetails(filteredPokemon);
         }
-        else{
+        else {
             getDetails(data.results);
         }
-        
+
 
         async function getDetails(results) {
+            console.log("process");
             try {
                 const fetchPromises = results.map(pokemon => fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(res => res.json()));
                 const pokedex = await Promise.all(fetchPromises);
@@ -50,6 +57,7 @@ function PokemonList({ query }) {
 
     }
 
+    // useEffect(getPokemon(), )
 
     useEffect(() => {
         setLoader('block');
@@ -65,7 +73,7 @@ function PokemonList({ query }) {
             </span>
             <div className="py-4">
 
-                <div className={`flex flex-row justify-between py-2 ${query===null? 'block' : 'hidden'}`}>
+                <div className={`flex flex-row justify-between py-2 ${query === null ? 'block' : 'hidden'}`}>
                     <button onClick={() => setOffset(offset - 24)} className={offset === 0 ? 'hidden' : 'block' + 'inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'}>Prev</button>
                     <button></button>
                     <button onClick={() => setOffset(offset + 24)} className="inline-flex items-center justify-center right px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none">Next</button>
@@ -82,7 +90,7 @@ function PokemonList({ query }) {
                 </ul>
 
 
-                <div className={`flex flex-row justify-between py-2 ${query===null? 'block' : 'hidden'}`}>
+                <div className={`flex flex-row justify-between py-2 ${query === null ? 'block' : 'hidden'}`}>
                     <button onClick={() => setOffset(offset - 24)} className={offset === 0 ? 'hidden' : 'block' + 'inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none'}>Previous</button>
                     <button></button>
                     <button onClick={() => setOffset(offset + 24)} className="inline-flex items-center justify-center right px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none">Next</button>

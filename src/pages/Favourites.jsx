@@ -1,9 +1,8 @@
 import PokemonList from "../components/PokemonList";
 import { Link } from "react-router-dom";
 
-function Favourite() {
-  const favourite = "favourite"; // Replace with your implementation
-
+function Favourites() {
+  const favourite = "favourites"; // Replace with your implementation
   return (
     <div className="favourites">
       <div className={`flex flex-row justify-between py-2`}>
@@ -25,4 +24,4 @@ function Favourite() {
   );
 }
 
-export default Favourite;
+export default Favourites;
