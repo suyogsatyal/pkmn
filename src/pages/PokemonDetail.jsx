@@ -86,7 +86,7 @@ function PokemonDetail({ id }) {
                 setLoader(false);
                 return (
                     <>
-                        <span className="capitalize">{param.name} doesn't exist.</span> 
+                        <span className="capitalize">{param.name} doesn't exist.</span>
                     </>
                 );
             }
@@ -175,13 +175,29 @@ function PokemonDetail({ id }) {
                             </div>
                         </div>
                         <div className="relative col-span-8 sm:col-span-5">
-                        <PokemonImageCard pokedex={pokedex} >
-                        </PokemonImageCard>
+                            <PokemonImageCard pokedex={pokedex} >
+                            </PokemonImageCard>
                             <div className="navigatePokemon flex absolute sm:hidden px-2 flex-row justify-between w-full left-0 top-2/4">
-                                <div className="prev cursor-pointer" onClick={() => { setLoader(true); navigate(`/${(pokedex.id === 1) ? '' : pokedex.id - 1}`) }}>
+                                <div className="prev cursor-pointer" onClick={() => { setLoader(true);  if (pokedex.id == 1) {
+                                    navigate(`/`)
+                                }
+                                else if (pokedex.id == 10001) {
+                                    navigate(`/1010`)
+                                }
+                                else {
+                                    navigate(`/${pokedex.id - 1}`)
+                                } }}>
                                     <img src={LeftW} alt="" srcSet="" className="w-8" />
                                 </div>
-                                <div className="next cursor-pointer" onClick={() => { setLoader(true); navigate(`/${pokedex.id + 1}`) }}>
+                                <div className="next cursor-pointer" onClick={() => {
+                                    setLoader(true);
+                                    if (pokedex.id === 1010) {
+                                        navigate("/10001");
+                                    } else {
+                                        navigate(`/${pokedex.id + 1}`);
+                                    }
+                                }}>
+
                                     <img src={RightW} alt="" srcSet="" className="w-8" />
                                 </div>
                             </div>
