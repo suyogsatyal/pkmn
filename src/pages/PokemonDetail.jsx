@@ -162,7 +162,7 @@ function PokemonDetail({ id }) {
                                 <img src={Right} alt="" srcSet="" className="w-8 lg:w-12" />
                             </div>
                         </div>
-                        <div className="relative col-span-8 sm:col-span-5">
+                        <div className="relative grid place-items-center col-span-8 sm:col-span-5">
                             <PokemonImageCard pokedex={pokedex} >
                             </PokemonImageCard>
                             <div className="navigatePokemon flex absolute sm:hidden px-2 flex-row justify-between w-full left-0 top-2/4">
@@ -197,7 +197,7 @@ function PokemonDetail({ id }) {
                     <div className="text-center py-4 name">
                         {flavor}
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 name">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 name">
                         <div>
                             <div className=" text-center text-2xl pb-3 border-b border-gray-400 text-gray-900">Evolution Line</div>
                             {evolutionTree.length === 0 ? (
@@ -211,7 +211,7 @@ function PokemonDetail({ id }) {
                                     const pokemonItems = (
                                         <ul key={index} className="flex flex-row gap-4 capitalize justify-evenly my-2 text-gray-600">
                                             {evolutionLine.map((pokemon, innerIndex) => (
-                                                <li key={innerIndex} onClick={() => { setLoader(true); navigate(`/${pokemon.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700">
+                                                <li key={innerIndex} onClick={() => { setLoader(true); navigate(`/${pokemon.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700 w-2/6">
                                                     <EvolutionCard name={pokemon.name}/>
                                                 </li>
                                             ))}
