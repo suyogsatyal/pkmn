@@ -20,8 +20,7 @@ function PokemonDetail({ id }) {
     const [pokedex, setPokedex] = useState({});
     const [species, setSpecies] = useState({});
     const [evolution, setEvolution] = useState([]);
-    const [evolutionTree, setEvolutionTree] = useState({});
-    const [evolutionTreeId, setEvolutionTreeId] = useState([]);
+    const [evolutionTree, setEvolutionTree] = useState([]);
     const [loader, setLoader] = useState(true);
     const [flavor, setFlavor] = useState('');
     const navigate = useNavigate();
@@ -39,47 +38,30 @@ function PokemonDetail({ id }) {
         chain.evolves_to.forEach((evolution) => {
             const firstEvolution = evolution.species.name;
             evos.push(firstEvolution);
-            // const firstEvolutionId = evolution.species.url;
-            // evosId.push(firstEvolutionId);
-
 
             if (evolution.evolves_to.length) {
                 for (const secondEvolution of evolution.evolves_to) {
                     const second = secondEvolution.species.name;
-                    // const secondId = secondEvolution.species.url;
                     evos.push(second);
-                    // evosId.push(secondId);
                 }
             }
         });
 
         const resolved = await Promise.all(evos.map((evolutionName) => Promise.resolve({ name: evolutionName })));
-        // const resolvedId = await Promise.all(evosId.map((evolutionId) => Promise.resolve({ url: evolutionId })));
 
-        // console.log(resolvedId)
         chain.evolves_to.map((evolution) => {
             const initialEvolution = resolved.find((pokemon) => pokemon.name === chain.species.name);
-            // const initialEvolutionId = resolved.find((pokemon) => pokemon.url === chain.species.url);
             const firstEvolution = resolved.find((pokemon) => pokemon.name === evolution.species.name);
-            // const firstEvolutionId = resolved.find((pokemon) => pokemon.url === evolution.species.url);
             const evolutionLine = [initialEvolution, firstEvolution];
-            // const evolutionLineId = [initialEvolutionId, firstEvolutionId];
-            // console.log(evolutionLineId)
-            // console.log(evolutionLine)
             if (evolution.evolves_to.length) {
                 for (const secondEvolution of evolution.evolves_to) {
                     const second = resolved.find((pokemon) => pokemon.name === secondEvolution.species.name);
-                    // const secondId = resolved.find((pokemon) => pokemon.url === secondEvolution.species.url);
                     evolutions.push([...evolutionLine, second]);
-                    // evolutionsId.push([...evolutionLineId, secondId]);
                 }
             } else {
                 evolutions.push(evolutionLine);
-                // evolutionsId.push(evolutionLineId);
             }
             setEvolutionTree(evolutions);
-            // setEvolutionTreeId(evolutionsId);
-            // console.log(evolutionTreeId)
         });
     };
 
@@ -216,19 +198,28 @@ function PokemonDetail({ id }) {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 name">
                         <div>Evolution Line</div>
+                        {evolutionTree.length === 0 ? (
+                            <ul className="flex flex-row gap-4 capitalize border border-gray-600 rounded-md justify-evenly">
+                                <li onClick={() => { setLoader(true); navigate(`/${pokedex.name}`) }} className="cursor-pointer">
+                                    {pokedex.name}
+                                </li>
+                            </ul>
+                        ) : (
+                            evolutionTree.map((evolutionLine, index) => {
+                                const pokemonItems = (
+                                    <ul key={index} className="flex flex-row gap-4 capitalize border border-gray-600 rounded-md justify-evenly">
+                                        {evolutionLine.map((pokemon, innerIndex) => (
+                                            <li key={innerIndex} onClick={() => { setLoader(true); navigate(`/${pokemon.name}`) }} className="cursor-pointer">
+                                                {pokemon.name}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                );
+                                return pokemonItems;
+                            })
+                        )}
 
-                        {evolutionTree.map((evolutionLine, index) => {
-                            const pokemonItems = [];
-                            pokemonItems.push(
-                                <ul key={index} className="flex flex-row gap-4 capitalize border border-gray-600 rounded-md justify-evenly">
-                                    {evolutionLine.map((pokemon, innerIndex) => {
-                                        return(<li key={innerIndex} onClick={() => {setLoader(true);navigate(`/${pokemon.name}`)}} className=" cursor-pointer">{pokemon.name}</li>)
-                                    }
-                                    )}
-                                </ul>
-                            );
-                            return pokemonItems;
-                        })}
+
 
 
                     </div>
