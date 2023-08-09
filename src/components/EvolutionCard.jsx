@@ -29,7 +29,7 @@ function EvolutionCard({ name }) {
             <br />
             <span>{pokedex.name}</span></p>
             <div className="flex flex-row items-center justify-center w-full py-1 md:py-3">
-                <img className="xl:w-32 xl:h-32 md:w-28 md:h-28 sm:w-24 sm:h-24 w-16 h-16 z-10" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedex.id}.png`} alt={pokedex.name} />
+                <img className="xl:w-[110px] xl:h-[110px] md:w-[70px] md:h-[70px] sm:w-24 sm:h-24 w-16 h-16 z-10 overflow-hidden" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedex.id}.png`} alt={pokedex.name} />
             </div>
         </span>
     );

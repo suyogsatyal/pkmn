@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { Line } from 'rc-progress';
+
 
 import { PokemonContext } from '../components/resources/context/Context'
 
@@ -203,7 +205,7 @@ function PokemonDetail({ id }) {
                             {evolutionTree.length === 0 ? (
                                 <ul className="flex flex-row gap-4 capitalize justify-evenly my-3 text-gray-600">
                                     <li onClick={() => { setLoader(true); navigate(`/${pokedex.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700 flex flex-col justify-center">
-                                        <EvolutionCard name={pokedex.name}/>
+                                        <EvolutionCard name={pokedex.name} />
                                     </li>
                                 </ul>
                             ) : (
@@ -212,7 +214,7 @@ function PokemonDetail({ id }) {
                                         <ul key={index} className="flex flex-row gap-4 capitalize justify-evenly my-2 text-gray-600">
                                             {evolutionLine.map((pokemon, innerIndex) => (
                                                 <li key={innerIndex} onClick={() => { setLoader(true); navigate(`/${pokemon.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700 w-2/6">
-                                                    <EvolutionCard name={pokemon.name}/>
+                                                    <EvolutionCard name={pokemon.name} />
                                                 </li>
                                             ))}
                                         </ul>
@@ -221,7 +223,41 @@ function PokemonDetail({ id }) {
                                 })
                             )}
                         </div>
+                        <div>
+                            <div className=" text-center text-2xl pb-3 border-b border-gray-400 text-gray-900">Stats</div>
+                            <div className="flex flex-col justify-around sm:justify-between name md:text-base xl:text-xl">
+                                <span className="flex justify-between py-3 border-b border-gray-400">
+                                    <span>HP: {pokedex.stats[0].base_stat}</span>
+                                    <Line percent={pokedex.stats[0].base_stat/2} strokeWidth={2} strokeColor="#AB23FF"  className=" overflow-hidden h-2 mt-3 w-[180px]"/>
+                                    {/* <span><ProgressBar completed={pokedex.stats[0].base_stat} strokeWidth={4} labelColor="#D3D3D3" /></span> */}
+                                </span>
 
+                                <span className="flex justify-between py-3 border-b border-gray-400">
+                                    <span>Attack: {pokedex.stats[1].base_stat}</span>
+                                    <Line percent={pokedex.stats[1].base_stat/2} strokeWidth={2} strokeColor="#AB23FF"  className=" overflow-hidden h-2 mt-3 w-[180px]"/>
+                                </span>
+
+                                <span className="flex justify-between py-3 border-b border-gray-400">
+                                    <span>Defense: {pokedex.stats[2].base_stat}</span>
+                                    <Line percent={pokedex.stats[2].base_stat/2} strokeWidth={2} strokeColor="#AB23FF"  className=" overflow-hidden h-2 mt-3 w-[180px]"/>
+                                </span>
+
+                                <span className="flex justify-between py-3 border-b border-gray-400">
+                                    <span>Special Attack: {pokedex.stats[3].base_stat}</span>
+                                    <Line percent={pokedex.stats[3].base_stat/2} strokeWidth={2} strokeColor="#AB23FF"  className=" overflow-hidden h-2 mt-3 w-[180px]"/>
+                                </span>
+
+                                <span className="flex justify-between py-3 border-b border-gray-400">
+                                    <span>Special Defense: {pokedex.stats[4].base_stat}</span>
+                                    <Line percent={pokedex.stats[4].base_stat/2} strokeWidth={2} strokeColor="#AB23FF"  className=" overflow-hidden h-2 mt-3 w-[180px]"/>
+                                </span>
+
+                                <span className="flex justify-between py-3 border-b border-gray-400">
+                                    <span>Speed: {pokedex.stats[5].base_stat}</span>
+                                    <Line percent={pokedex.stats[5].base_stat/2} strokeWidth={2} strokeColor="#AB23FF"  className=" overflow-hidden h-2 mt-3 w-[180px]"/>
+                                </span>
+                            </div>
+                        </div>
 
 
 
