@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .wave-group {
     position: relative;
     width: 100%;
@@ -48,7 +47,6 @@
 .wave-group .input:focus~.bar:before,
 .wave-group .input:focus~.bar:after {
     width: 50%;
-=======
 .wave-group {
     position: relative;
     width: 100%;
@@ -98,5 +96,4 @@
 .wave-group .input:focus~.bar:before,
 .wave-group .input:focus~.bar:after {
     width: 50%;
->>>>>>> c59c965d3bcea83a3edaeb1e640d6a0c18ef17cc
-}
+}}
