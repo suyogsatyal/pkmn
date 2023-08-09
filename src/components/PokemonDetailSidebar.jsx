@@ -1,8 +1,9 @@
 
 function PokemonDetailSidebar ({pokedex, species}){
     return(
-        <div className="pokemonDetailSidebar col-span-8 sm:col-span-3 py-3 text-gray-700">
+        <div className="pokemonDetailSidebar col-span-8 sm:col-span-3 py-3 text-gray-600">
                             <div className="flex flex-col justify-around sm:justify-between name md:text-base xl:text-xl">
+                                <span className="text-center text-gray-900 text-2xl pb-3 border-b border-gray-400">Details</span>
                                 <span className="flex justify-between py-3 border-b border-gray-400">
                                     <span>Weight</span>
                                     <span>{pokedex.weight / 10 + ' kg'}</span>

@@ -4,7 +4,7 @@ import PokemonDetail from "./pages/PokemonDetail";
 import SearchResult from "./pages/SearchResult";
 import Favourites from "./pages/Favourites";
 import { PokemonContext } from "./components/resources/context/Context";
-import { PokemonProvider } from "./components/resources/context/Context";
+// import { PokemonProvider } from "./components/resources/context/Context";
 import Home from "./pages/Home";
 
 function App() {

@@ -6,6 +6,7 @@ import { PokemonContext } from '../components/resources/context/Context'
 import Loading from "../components/Loading";
 import PokemonImageCard from "../components/PokemonImageCard";
 import PokemonDetailSidebar from "../components/PokemonDetailSidebar";
+import EvolutionCard from "../components/EvolutionCard";
 
 import GoBack from "../components/buttons/GoBack";
 
@@ -197,27 +198,30 @@ function PokemonDetail({ id }) {
                         {flavor}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 name">
-                        <div>Evolution Line</div>
-                        {evolutionTree.length === 0 ? (
-                            <ul className="flex flex-row gap-4 capitalize border border-gray-600 rounded-md justify-evenly">
-                                <li onClick={() => { setLoader(true); navigate(`/${pokedex.name}`) }} className="cursor-pointer">
-                                    {pokedex.name}
-                                </li>
-                            </ul>
-                        ) : (
-                            evolutionTree.map((evolutionLine, index) => {
-                                const pokemonItems = (
-                                    <ul key={index} className="flex flex-row gap-4 capitalize border border-gray-600 rounded-md justify-evenly">
-                                        {evolutionLine.map((pokemon, innerIndex) => (
-                                            <li key={innerIndex} onClick={() => { setLoader(true); navigate(`/${pokemon.name}`) }} className="cursor-pointer">
-                                                {pokemon.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                );
-                                return pokemonItems;
-                            })
-                        )}
+                        <div>
+                            <div className=" text-center text-2xl pb-3 border-b border-gray-400 text-gray-900">Evolution Line</div>
+                            {evolutionTree.length === 0 ? (
+                                <ul className="flex flex-row gap-4 capitalize justify-evenly my-3 text-gray-600">
+                                    <li onClick={() => { setLoader(true); navigate(`/${pokedex.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700 flex flex-col justify-center">
+                                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex.id}.png`} alt="" />
+                                        <span className="text-center">{pokedex.name}</span>
+                                    </li>
+                                </ul>
+                            ) : (
+                                evolutionTree.map((evolutionLine, index) => {
+                                    const pokemonItems = (
+                                        <ul key={index} className="flex flex-row gap-4 capitalize justify-evenly my-2 text-gray-600">
+                                            {evolutionLine.map((pokemon, innerIndex) => (
+                                                <li key={innerIndex} onClick={() => { setLoader(true); navigate(`/${pokemon.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700">
+                                                    <EvolutionCard name={pokemon.name}/>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    );
+                                    return pokemonItems;
+                                })
+                            )}
+                        </div>
 
 
 
