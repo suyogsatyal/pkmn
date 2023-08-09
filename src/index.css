@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.index{
+    font-family: 'Cabin Condensed', sans-serif;
+}
+
+.name{
+    font-family: 'Wix Madefor Text', sans-serif;
+}
+
+.pokedex{
+    font-family: 'Cabin Condensed', sans-serif;
+}
