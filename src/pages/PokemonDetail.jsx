@@ -203,8 +203,7 @@ function PokemonDetail({ id }) {
                             {evolutionTree.length === 0 ? (
                                 <ul className="flex flex-row gap-4 capitalize justify-evenly my-3 text-gray-600">
                                     <li onClick={() => { setLoader(true); navigate(`/${pokedex.name}`) }} className="cursor-pointer duration-150 hover:text-gray-700 flex flex-col justify-center">
-                                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedex.id}.png`} alt="" />
-                                        <span className="text-center">{pokedex.name}</span>
+                                        <EvolutionCard name={pokedex.name}/>
                                     </li>
                                 </ul>
                             ) : (
