@@ -258,9 +258,6 @@ function PokemonDetail({ id }) {
                                 </span>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </>

@@ -1,3 +1,5 @@
+//This function returns a color code according to the data type of the pokemon
+
 function getColor(type) {
     switch (type) {
         case 'fighting':

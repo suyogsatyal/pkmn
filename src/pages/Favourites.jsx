@@ -1,11 +1,13 @@
-import PokemonList from "../components/PokemonList";
+import React from "react";
+import PokemonList from "../components/PokemonList"; // Import the PokemonList component
 import { Link } from "react-router-dom";
 
 function Favourites() {
-  const favourite = "favourites"; // Replace with your implementation
+  const favourite = "favourites"; // Placeholder for your favorite Pokemon data
   return (
     <div className="favourites">
       <div className={`flex flex-row justify-between py-2`}>
+        {/* Link to go back to the home page */}
         <Link
           to="/"
           className={
@@ -14,11 +16,13 @@ function Favourites() {
         >
           ← Go Back
         </Link>
+        {/* Placeholder for buttons */}
         <button></button>
-        <button className="hidden ">Next</button>
+        <button className="hidden">Next</button>
       </div>
 
       <span className="flex justify-center">Your Favourite Pokemons</span>
+      {/* Render the PokemonList component with the 'favourite' query */}
       <PokemonList query={favourite} /> {/* Update the component name if necessary */}
     </div>
   );
