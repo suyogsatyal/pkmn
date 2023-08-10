@@ -41,10 +41,9 @@ To get started with the Pokedex Project on your local machine, follow these step
 2.  Open your web browser and navigate to `http://127.0.0.1:5173`
 
 ## Screenshots/GIFs
+![Screenshot 1](https://github.com/suyogsatyal/pkmn/assets/62869132/64712878-4423-4d7e-bbd6-77595c7f17ce) _Home Page - Browse Pokemon List_
 
-![Screenshot 1](https://chat.openai.com/screenshots/screenshot1.png) _Home Page - Browse Pokemon List_
-
-![Screenshot 2](https://chat.openai.com/screenshots/screenshot2.png) _Pokemon Details Page_
+![Screenshot 2](![image](https://github.com/suyogsatyal/pkmn/assets/62869132/53f2ce2a-8afe-4b20-a57e-d53cde8a72af) _Pokemon Details Page_
 
 
 ## Technologies Used
