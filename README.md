@@ -1,1 +1,1 @@
-# pkmn
+# Pokedex Application using React
