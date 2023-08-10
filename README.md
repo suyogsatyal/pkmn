@@ -9,7 +9,7 @@ A comprehensive Pokedex web application was developed using React, offering info
 -   [Getting Started](https://github.com/suyogsatyal/pkmn#getting-started)
 -   [Installation](https://github.com/suyogsatyal/pkmn#installation)
 -   [Usage](https://github.com/suyogsatyal/pkmn#usage)
--   [Screenshots/GIFs](https://github.com/suyogsatyal/pkmn#screenshots-gifs)
+-   [Screenshots](https://github.com/suyogsatyal/pkmn#screenshots)
 -   [Technologies Used](https://github.com/suyogsatyal/pkmn#technologies-used)
 -   [Contributing](https://github.com/suyogsatyal/pkmn#contributing)
 -   [Acknowledgements](https://github.com/suyogsatyal/pkmn#acknowledgements)
@@ -40,10 +40,12 @@ To get started with the Pokedex Project on your local machine, follow these step
 1.  Run the development server: `npm run dev`
 2.  Open your web browser and navigate to `http://127.0.0.1:5173`
 
-## Screenshots/GIFs
-![Screenshot 1](https://github.com/suyogsatyal/pkmn/assets/62869132/64712878-4423-4d7e-bbd6-77595c7f17ce) _Home Page - Browse Pokemon List_
+## Screenshots
 
-![Screenshot 2](https://github.com/suyogsatyal/pkmn/assets/62869132/53f2ce2a-8afe-4b20-a57e-d53cde8a72af) _Pokemon Details Page_
+_Home Page - Browse Pokemon List_
+![Screenshot 1](https://github.com/suyogsatyal/pokedex/assets/62869132/2c8274ce-1be4-4147-8f80-596ba572dc2d)_Pokedex Home Page_
+
+![Screenshot 2](https://github.com/suyogsatyal/pokedex/assets/62869132/5e68c7a4-0e46-4c4f-a3fa-74f54b87b040)_Pokemon Details Page_
 
 
 ## Technologies Used
