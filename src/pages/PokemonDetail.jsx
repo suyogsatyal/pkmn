@@ -72,6 +72,7 @@ function PokemonDetail({ id }) {
 
     useEffect(() => {
         setClick(false);
+        setEvolutionTree([]);
         const getDetails = async () => {
             const res = await fetch(baseURL);
             if (res.status === 404) {
